@@ -289,10 +289,22 @@ require("lazy").setup({
 		lazy = false, -- Load immediately
 		config = function()
 			vim.g.vimtex_view_general_viewer = "okular"
-			vim.g.vimtex_view_general_options = "--unique file:@pdf\\#src:@line@tex"
+			vim.g.vimtex_view_general_options = "--unique --noraise file:@pdf\\#src:@line@tex"
+			vim.g.vimtex_compiler_method = "latexmk"
+			vim.g.vimtex_complete_close_braces = 1
 			vim.g.tex_flavor = "latex"
 			vim.g.maplocalleader = ","
+			vim.g.vimtex_imaps_leader = ","
 			vim.cmd("filetype plugin indent on")
+			vim.cmd("syntax enable")
+			vim.cmd([[
+  call vimtex#imaps#add_map({
+        \ 'lhs' : 'v',
+        \ 'rhs' : 'vimtex#imaps#style_math("vec")',
+        \ 'expr' : 1,
+        \ 'leader' : '#',
+        \ 'wrapper' : 'vimtex#imaps#wrap_math'
+        \}) ]])
 		end,
 	},
 
@@ -1013,6 +1025,7 @@ require("lazy").setup({
 				"query",
 				"vim",
 				"vimdoc",
+				"latex",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,
@@ -1021,7 +1034,7 @@ require("lazy").setup({
 				-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
 				--  If you are experiencing weird indenting issues, add the language to
 				--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-				additional_vim_regex_highlighting = { "ruby" },
+				additional_vim_regex_highlighting = { "ruby", "latex" },
 			},
 			indent = { enable = true, disable = { "ruby" } },
 		},
