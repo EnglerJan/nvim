@@ -304,7 +304,12 @@ require("lazy").setup({
         \ 'expr' : 1,
         \ 'leader' : '#',
         \ 'wrapper' : 'vimtex#imaps#wrap_math'
-        \}) ]])
+        \})
+  call vimtex#imaps#add_map({
+        \ 'lhs' : '1',
+        \ 'rhs' : '\mathds{1}'
+  \})
+  ]])
 		end,
 	},
 
@@ -863,7 +868,19 @@ require("lazy").setup({
 			-- See `:help cmp`
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-			luasnip.config.setup({})
+			luasnip.config.set_config({
+				enable_autosnippets = true,
+				store_selection_keys = "<Tab>",
+				vim.cmd([[
+        imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+        smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>'
+        imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+        smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+        " Choice nodes
+        " imap <silent><expr> <C-f> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-f>'
+        " smap <silent><expr> <C-f> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-f>']]),
+			})
+			require("luasnip.loaders.from_lua").lazy_load({ paths = { vim.fn.expand("$HOME/.config/nvim/LuaSnip/") } }) --luasnip file
 
 			cmp.setup({
 				snippet = {
