@@ -1,9 +1,5 @@
 --[[
-    :help lua-guide
-    (or HTML version): https://neovim.io/doc/user/lua-guide.html
-
-Kickstart Guide:
-    MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
+MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
 
   I have left several `:help X` comments throughout the init.lua
     These are hints about where to find more information about the relevant settings,
@@ -170,8 +166,6 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
-
 	-- NOTE: Plugins can also be added by using a table,
 	-- with the first argument being the link and the following
 	-- keys can be used to configure plugin behavior/loading/etc.
@@ -217,22 +211,9 @@ require("lazy").setup({
 			vim.g.vimtex_complete_close_braces = 1
 			vim.g.tex_flavor = "latex"
 			vim.g.maplocalleader = ","
-			vim.g.vimtex_imaps_leader = ","
+			vim.g.vimtex_imaps_enabled = 0
 			vim.cmd("filetype plugin indent on")
 			vim.cmd("syntax enable")
-			vim.cmd([[
-  call vimtex#imaps#add_map({
-        \ 'lhs' : 'v',
-        \ 'rhs' : 'vimtex#imaps#style_math("vec")',
-        \ 'expr' : 1,
-        \ 'leader' : '#',
-        \ 'wrapper' : 'vimtex#imaps#wrap_math'
-        \})
-  call vimtex#imaps#add_map({
-        \ 'lhs' : '1',
-        \ 'rhs' : '\mathds{1}'
-  \})
-  ]])
 		end,
 	},
 
@@ -1045,6 +1026,3 @@ vim.keymap.set(
 	"<Leader>L",
 	'<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/lua/LuaSnip/"})<CR>'
 )
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
