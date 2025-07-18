@@ -205,8 +205,7 @@ require("lazy").setup({
 		"lervag/vimtex",
 		lazy = false, -- Load immediately
 		config = function()
-			vim.g.vimtex_view_general_viewer = "okular"
-			vim.g.vimtex_view_general_options = "--unique --noraise file:@pdf\\#src:@line@tex"
+			vim.g.vimtex_view_method = "zathura"
 			vim.g.vimtex_compiler_method = "latexmk"
 			vim.g.vimtex_complete_close_braces = 1
 			vim.g.tex_flavor = "latex"
