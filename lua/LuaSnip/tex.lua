@@ -15,11 +15,6 @@ local in_mathzone = function()
 end
 
 return {
-	--s("al", {
-	--	t({ "\\begin{align*}", "\t" }),
-	--	i(1),
-	--	t({ "", "\\end{align*}" }),
-	--}),
 	s(
 		{ trig = "eq" },
 		fmta(
@@ -61,7 +56,8 @@ return {
 			[[
     \begin{<>}
       <>
-    \end{<>}]],
+    \end{<>}
+    ]],
 			{
 				i(1),
 				i(2),
