@@ -195,6 +195,9 @@ require("lazy").setup({
 
 	{
 		"idossha/matlab.nvim",
+		commit = "9d09dd8",
+		ft = { "matlab" },
+		lazy = true,
 		config = function()
 			require("matlab").setup({
 				-- Path to MATLAB executable (should be full path)
@@ -210,12 +213,12 @@ require("lazy").setup({
 				panel_size = 50, -- Size of the tmux pane (in percentage)
 				panel_size_type = "percentage", -- 'percentage' or 'fixed' (fixed = columns)
 				tmux_pane_direction = "right", -- Position of the tmux pane ('right', 'below')
-				tmux_pane_focus = false, -- Make tmux pane visible when created
+				tmux_pane_focus = true, -- Make tmux pane visible when created
 
 				-- Behavior options
 				auto_start = true, -- Auto-start MATLAB when opening a .m file
 				default_mappings = true, -- Enable default keymappings
-				force_nogui_with_breakpoints = true, -- Prevent MATLAB GUI from opening when breakpoints exist
+				force_nogui_with_breakpoints = false, -- Prevent MATLAB GUI from opening when breakpoints exist
 
 				-- Breakpoint visualization
 				breakpoint = {
@@ -833,11 +836,14 @@ require("lazy").setup({
         imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
         smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
         " Choice nodes
-        " imap <silent><expr> <C-f> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-f>'
+        " imap <silent><expr> <Tab> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-f>'
         " smap <silent><expr> <C-f> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-f>']]),
 			})
 			require("luasnip.loaders.from_lua").lazy_load({
-				paths = { vim.fn.expand("$HOME/.config/nvim/lua/LuaSnip/") },
+				paths = {
+					vim.fn.expand("$HOME/.config/nvim/lua/LuaSnip/"),
+					vim.fn.expand("$HOME/.config/nvim/lua/LuaSnip/tex/"),
+				},
 				reload = true,
 			})
 
